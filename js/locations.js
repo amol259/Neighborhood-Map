@@ -1,0 +1,35 @@
+/* Location Data used in the project is stored here*/
+
+var  locations = [
+    {
+      title: "Sheraton Tribeca New York Hotel",
+      location: {
+        lat:40.720658,
+        lng:-74.004486
+      }
+    },  {
+      title: 'Conrad New York Hotel',
+      location: {
+        lat: 40.715005,
+        lng: -74.015214
+      }
+    }, {
+      title: 'Park Central NYC',
+      location: {
+        lat: 40.782420,
+        lng: -73.996831
+      }
+    }, {
+      title: 'Hotel 50 Bowery',
+      location: {
+        lat: 40.716002,
+        lng: -73.9924972
+      }
+    }, {
+      title: 'The ludlow Hotel',
+      location: {
+        lat: 40.721789,
+        lng: -73.987220
+      }
+    }
+  ];
