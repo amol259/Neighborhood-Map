@@ -9,24 +9,17 @@
 </head>
   <body>
     <!-- Side Nav -->
-      <div id="Top" class=row>
-        <div id="title" class= col-md-10>
-          Top Hotels in New York
-        </div>
-      </div>
-      <div class = "row">
-        <div class="col-md-4">
-          <p id="searchInput">
-            Search Hotels:
-          </p>
-          <p>
-              <input type="search" data-bind="textInput: userInput">
-          </p>
-
-        </div>
+    <div class="container">
+      <div class="options-box">
+          <h1>Find the Top hotels in NYC</h1>
+          <div>
+              <span class="text">Search for Hotels:</span> <br>
+              <input id="places-search" type="text" placeholder="Ex: Park Central NYC">
+              <input id="go-places" type="button" value="Go">
+            </div>
       </div>
 
-
+    </div>
   <article>
       <!--Page Google Map-->
       <div>
@@ -34,13 +27,6 @@
       </div>
       <!--/#page-map-wrapper-->
     </article>
-      <div class="error-div-wrapper">
-          <!--Observable for Google Maps Error Div -->
-          <div class="no-map" data-bind="visible: mapError">
-            <p> Something is wrong with Google Maps! <br>Try again later.<br></p>
-          </div>
-        </div>
-
     </div>
 
 

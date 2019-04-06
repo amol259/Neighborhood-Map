@@ -18,7 +18,7 @@ h1 {
   color: #525454;
   font-size: 22px;
   margin: 0 0 10px 0;
-  text-align: center;
+  text-align: left;
 }
 
 #hide-listings,
@@ -29,11 +29,10 @@ h1 {
 #map {
   bottom:0px;
   height: 100%;
-  left: 362px;
+  left: 300px;
   position: absolute;
   right: 0px;
 }
-
 .options-box {
   background: #fff;
   border: 1px solid #999;
