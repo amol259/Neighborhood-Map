@@ -44,3 +44,7 @@ h1 {
   text-align: left;
   width: 340px;
 }
+
+#top {
+  background-color: black;
+}

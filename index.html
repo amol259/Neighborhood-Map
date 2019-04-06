@@ -8,14 +8,45 @@
   <link rel="stylesheet" href="css/main.css">
 </head>
   <body>
-      <div id="map"> </div>
+    <!-- Side Nav -->
+      <div id="Top" class=row>
+        <div id="title" class= col-md-10>
+          Top Hotels in New York
+        </div>
+      </div>
+      <div class = "row">
+        <div class="col-md-4">
+          <p id="searchInput">
+            Search Hotels:
+          </p>
+          <p>
+              <input type="search" data-bind="textInput: userInput">
+          </p>
+
+        </div>
+      </div>
+
+
+  <article>
+      <!--Page Google Map-->
+      <div>
+        <div id="map"></div>
+      </div>
+      <!--/#page-map-wrapper-->
+    </article>
+      <div class="error-div-wrapper">
+          <!--Observable for Google Maps Error Div -->
+          <div class="no-map" data-bind="visible: mapError">
+            <p> Something is wrong with Google Maps! <br>Try again later.<br></p>
+          </div>
+        </div>
+
+    </div>
 
 
       
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
-    <script src='js/locations.js'></script>
     <script src='js/ajaxCalls.js'></script>
     <script src='js/app.js'></script>
     <script src='js/model.js'></script>
