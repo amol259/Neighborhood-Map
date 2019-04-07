@@ -1,8 +1,8 @@
-var infowindow, map;
+var map;
 var markers = [];
+var infowindow;
 function initMap() {
-/* Location Data used in the project is stored here*/
- /*Creates map*/
+  //Creates map and sets coordinates for where it is centered at
  map = new google.maps.Map(document.getElementById('map'), {
   center: {
       lat:  40.7413549, 
@@ -11,6 +11,7 @@ function initMap() {
   zoom: 13
 });
 
+//Array of locations of the top hotels in New York User sees
 var  locations = [
     {
       title: "Sheraton Tribeca New York ",
@@ -52,45 +53,11 @@ var  locations = [
       fourSquareVenueID: "536020eb11d2ce653fb711d0",
     }
   ];
-  var largeInfowindow = new google.maps.InfoWindow();
-  var bounds = new google.maps.LatLngBounds();
 
+  var currentMarker = null;
+  infowindow =  new google.maps.InfoWindow();
 
-// This function populates the infowindow when the marker is clicked. We'll only allow
-// one infowindow which will open at the marker that is clicked, and populate based
-// on that markers position.
-// function populateInfoWindow(marker, infowindow) {
-//   // Check to make sure the infowindow is not already opened on this marker.
-//   if (infowindow.marker != marker) {
-//     infowindow.marker = marker;
-//     infowindow.setContent('<div>' + marker.title + '</div>');
-//     infowindow.open(map, marker);
-//     // Make sure the marker property is cleared if the infowindow is closed.
-//     infowindow.addListener('closeclick',function(){
-//       infowindow.setMarker = null;
-//     });
-//   }
-
-//   ko.applyBindings(new ViewModel());
-
-// }
-
-
-//     var currentMarker = null
-//     infowindow = new google.maps.InfoWindow()
-//  // Style the markers a bit. This will be our listing marker icon.
-//  var defaultIcon = makeMarkerIcon('0091ff');
-
-//  // Create a "highlighted location" marker color for when the user
-//  // mouses over the marker.
-//  var highlightedIcon = makeMarkerIcon('FFFF24');
-
-//  var largeInfowindow = new google.maps.InfoWindow();
-
-
-
-
-    /*Iterates over the restaurants array and creates a marker for each object*/
+//Iterates through array and sets the marker from locations array
     for (i = 0; i < locations.length; i++) {
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(locations[i].location),
@@ -99,25 +66,64 @@ var  locations = [
             id: locations[i].fourSquareVenueID,
             title: locations[i].title
         });
-        /*Populates the markers array with each marker*/
+        //adds the marker into the markers array
         markers.push(marker);
-        /*Animates the markers when clicked*/
+        //When clicking on a makrker it returns the 4square request
         marker.addListener('click', (function(marker) {
-            return function () {
-                fsrequest(marker);
-                /*Prevents more than one marker from being animated at a time*/
-                if (currentMarker) currentMarker.setAnimation(null);
-                currentMarker = marker;
-                marker.setAnimation(google.maps.Animation.BOUNCE);
-           }
-       })(marker))
+          return function () {
+              //api call to 4square
+              fourSquarerequest(marker);
+              //Only Set animation if there is a marker
+              if (currentMarker) {
+                  currentMarker.setAnimation(null)
+              } else {
+              currentMarker = marker;
+              marker.setAnimation(google.maps.Animation.BOUNCE);
+              setTimeout(function(){ marker.setAnimation(null); }, 750);  
+              }         
+          }
+      })(marker))
     }
-    /*Calls the ViewModel method in knockoutfile.js*/
+
+    //Calls view model function in model.js file
     ko.applyBindings(new ViewModel());
-  }
+}
 
-
-/*Google maps error handling */
 function errorHandling() {
 	alert("Google Maps has failed to load. Please try again.");
 }
+
+
+/* Ajax request for the project. */
+
+var fourSquarerequest = function (marker) {
+  var apiURL = 'https://api.foursquare.com/v2/venues/';
+  var foursquareClientID = '5WCCP00O5EJYVALVKM2ZSV2R3GPNFIQH0LT4AZNQTUDGKAIC'
+  var foursquareSecret ='EOO4AXGRYFEJE0RET4CQJWO0FSCHDERWQPIC0DG5IKU3FSA1';
+  var foursquareVersion = '20170115';
+  var venueId = marker.id;
+  var foursquareURL = apiURL + venueId + '?client_id=' + foursquareClientID +  '&client_secret=' + foursquareSecret +'&v=' + foursquareVersion;
+
+  /*async request for the FourSquare api data*/
+  $.ajax({
+    url: foursquareURL,
+    success: function(data) {
+      //Grab the following from the api response
+      var name =  data.response.venue.name;
+      var url = data.response.venue.url;
+      var description = data.response.venue.description;
+      console.log(name);
+      console.log(url);
+      console.log(description);
+
+      /*The infowindow is udpdated with the FourSquare api data and the infowindow is opened immediately afterwards*/
+      infowindow.setContent(name + "\n" + "Description: " + description.toString() + "\n ");
+      infowindow.open(map, marker);
+      },
+      error: function(error) {
+        alert("Error, Four Square api data could not display")
+    }
+  });
+};
+
+
