@@ -2,7 +2,7 @@
 
 var ViewModel = function() {
     var self = this;
-    /*Stores and updates userInput from index.html line 23 with a knockout.js "textinput" databind*/
+    //Takes the user input and binds it to KO
     self.userInput = ko.observable('');
     /*Stores and upates markers in knockout.js observable array*/
     self.locations = ko.observableArray();

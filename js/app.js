@@ -92,31 +92,24 @@ function errorHandling() {
 	alert("Google Maps has failed to load. Please try again.");
 }
 
-
-/* Ajax request for the project. */
-
-var fourSquarerequest = function (marker) {
+function fourSquarerequest (marker) {
   var apiURL = 'https://api.foursquare.com/v2/venues/';
-  var foursquareClientID = '5WCCP00O5EJYVALVKM2ZSV2R3GPNFIQH0LT4AZNQTUDGKAIC'
-  var foursquareSecret ='EOO4AXGRYFEJE0RET4CQJWO0FSCHDERWQPIC0DG5IKU3FSA1';
+  var foursquareClientID = 'ERNZZPCCBVKVSFQL14JBI5FEV3RGYXGIBSMX0RP5QGF32B1V'
+  var foursquareClientSecret ='UEC2IOYE01WY1QJ3MKCWMS024TXPVJPAURRCJYDWKNDORRVD';
   var foursquareVersion = '20170115';
   var venueId = marker.id;
-  var foursquareURL = apiURL + venueId + '?client_id=' + foursquareClientID +  '&client_secret=' + foursquareSecret +'&v=' + foursquareVersion;
+  var foursquareURL = apiURL + venueId + '?client_id=' + foursquareClientID +  '&client_secret=' + foursquareClientSecret +'&v=' + foursquareVersion;
 
-  /*async request for the FourSquare api data*/
   $.ajax({
     url: foursquareURL,
     success: function(data) {
       //Grab the following from the api response
       var name =  data.response.venue.name;
-      var url = data.response.venue.url;
       var phone = data.response.venue.contact.phone;
       console.log(name);
-      console.log(url);
       console.log(phone);
 
-      /*The infowindow is udpdated with the FourSquare api data and the infowindow is opened immediately afterwards*/
-      infowindow.setContent(name + "\n" + "Phone Number: " + phone.toString() + "\n ");
+      infowindow.setContent(name + ";   " + "Phone Number: " + phone.toString());
       infowindow.open(map, marker);
       },
       error: function(error) {
@@ -124,5 +117,10 @@ var fourSquarerequest = function (marker) {
     }
   });
 };
+
+
+function ViewModel() {
+
+}
 
 

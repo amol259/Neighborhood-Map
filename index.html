@@ -12,22 +12,28 @@
     <div class="container">
       <div class="options-box">
           <h1>Find the Top hotels in NYC</h1>
-          <div>
-              <span class="text">Search for Hotels:</span> <br>
-              <input id="places-search" type="text" placeholder="Ex: Park Central NYC">
-              <input id="go-places" type="button" value="Go">
-            </div>
       </div>
-
+      <div class="row">
+        <div class="col-md-4">
+          <p id="searchtxt" class="">
+           Search Hotels:
+          </p>
+          <p>
+           <input type="search" data-bind="textInput: userInput">
+         </p>
+         <ul data-bind="foreach: filteredItems">
+           <li data-bind="text: name, click: $root.listedItem"></li>
+         </ul>
+        </div>
     </div>
-  <article>
+    </div>
+    <article>
       <!--Page Google Map-->
       <div>
         <div id="map"></div>
       </div>
       <!--/#page-map-wrapper-->
     </article>
-    </div>
 
 
       
