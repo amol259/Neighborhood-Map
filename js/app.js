@@ -79,7 +79,6 @@ var  locations = [
               } else {
               currentMarker = marker;
               marker.setAnimation(google.maps.Animation.BOUNCE);
-              setTimeout(function(){ marker.setAnimation(null); }, 750);  
               }         
           }
       })(marker))
@@ -111,13 +110,13 @@ var fourSquarerequest = function (marker) {
       //Grab the following from the api response
       var name =  data.response.venue.name;
       var url = data.response.venue.url;
-      var description = data.response.venue.description;
+      var phone = data.response.venue.contact.phone;
       console.log(name);
       console.log(url);
-      console.log(description);
+      console.log(phone);
 
       /*The infowindow is udpdated with the FourSquare api data and the infowindow is opened immediately afterwards*/
-      infowindow.setContent(name + "\n" + "Description: " + description.toString() + "\n ");
+      infowindow.setContent(name + "\n" + "Phone Number: " + phone.toString() + "\n ");
       infowindow.open(map, marker);
       },
       error: function(error) {
