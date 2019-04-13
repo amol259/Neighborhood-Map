@@ -104,12 +104,10 @@ function fourSquarerequest (marker) {
     url: foursquareURL,
     success: function(data) {
       //Grab the following from the api response
-      var name =  data.response.venue.name;
+      var title =  data.response.venue.name;
       var phone = data.response.venue.contact.phone;
-      console.log(name);
-      console.log(phone);
-
-      infowindow.setContent(name + ";   " + "Phone Number: " + phone.toString());
+      //sets content in the information window
+      infowindow.setContent(title + ";   " + "Phone Number: " + phone.toString());
       infowindow.open(map, marker);
       },
       error: function(error) {
@@ -117,10 +115,4 @@ function fourSquarerequest (marker) {
     }
   });
 };
-
-
-function ViewModel() {
-
-}
-
 

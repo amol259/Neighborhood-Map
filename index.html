@@ -9,24 +9,24 @@
 </head>
   <body>
     <!-- Side Nav -->
-    <div class="container">
       <div class="options-box">
           <h1>Find the Top hotels in NYC</h1>
       </div>
       <div class="row">
         <div class="col-md-4">
-          <p id="searchtxt" class="">
+          <p id="searchtxt" placeholder="test">
            Search Hotels:
           </p>
           <p>
-           <input type="search" data-bind="textInput: userInput">
+           <input type="search" data-bind="textInput: userInput" placeholder="hotel..." class="box">
          </p>
+         <!-- KO JS Items -->
          <ul data-bind="foreach: filteredItems">
-           <li data-bind="text: name, click: $root.listedItem"></li>
+           <li data-bind="text: title, click: $root.listedItem"></li>
          </ul>
         </div>
     </div>
-    </div>
+    
     <article>
       <!--Page Google Map-->
       <div>
