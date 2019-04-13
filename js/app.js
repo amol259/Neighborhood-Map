@@ -20,12 +20,12 @@ var  locations = [
     fourSquareVenueID: "4f22ca77e4b0ed3396a83a05",
 
   }, {
-    title: 'Park Central NYC',
+    title: 'Hotel Indigo Lower East Side',
     location: {
-      lat: 40.764720,
-      lng: -73.981180
+      lat: 40.724030,
+      lng: -73.987610
     },
-    fourSquareVenueID: "parkcentralny",
+    fourSquareVenueID: "54c0151d498e4c827296cd41",
 
   }, {
     title: 'Hotel 50 Bowery',
@@ -55,7 +55,7 @@ function initMap() {
   zoom: 13
 });
 
-//Iterates through array and sets the marker from locations array
+//Iterates through array and sets the markers from locations array
     for (i = 0; i < locations.length; i++) {
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(locations[i].location),
@@ -64,8 +64,6 @@ function initMap() {
             id: locations[i].fourSquareVenueID,
             title: locations[i].title
         });
-
-        //adds the marker into the markers array
         markers.push(marker);
 
         marker.addListener('click', (function(marker) {
@@ -76,7 +74,7 @@ function initMap() {
               if (marker === null) {
                   currentMarker.setAnimation(null)
               } else {
-              // currentMarker = marker;
+              //Bounce Once when clicked on
               marker.setAnimation(google.maps.Animation.BOUNCE);
               setTimeout(function(){ marker.setAnimation(null); }, 750);  
 
@@ -121,7 +119,6 @@ function fourSquarerequest (marker) {
 
 var Place = function(data) {
   this.title = ko.observable(data.title);
-  console.log(title)
 }
 
 function ViewModel() {
@@ -139,9 +136,11 @@ function ViewModel() {
      google.maps.event.trigger(marker, 'click');
   }
   self.filteredPlaces = ko.computed(function() {
+    //if nothing is inputted show whole list
     if (!self.query()) {
       return self.placeList();
     } else {
+      //else filter based on query
       return self.placeList()
         .filter(place => place.title.toLowerCase().indexOf(self.query().toLowerCase()) > -1);
     }

@@ -14,16 +14,16 @@
       </div>
       <div class="row">
         <div class="col-md-4">
-          <p id="searchtxt" placeholder="test">
+          <h2>Click on a hotel from the<br> list to find more info.</h2>
+
+          <p id="Subtitle">
            Search Hotels:
           </p>
           <p>
-            <input type="text" data-bind="value: query, valueUpdate: 'keyup'" placeholder="Search...">
+            <input type="text" data-bind="value: query, valueUpdate: 'keyup'" placeholder="Filter...">
           </p>
-         <!-- KO JS Items -->
          <ul data-bind="foreach:filteredPlaces">
-           <!-- <span data-bind="text:title"></span><br> -->
-           <li data-bind="text: title, click: $root.listedItem"></li>
+          <li data-bind="text: title, click: $root.listedItem"></li>
 
          </ul>
         </div>
@@ -34,10 +34,7 @@
       <div>
         <div id="map"></div>
       </div>
-      <!--/#page-map-wrapper-->
     </article>
-
-
       
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
