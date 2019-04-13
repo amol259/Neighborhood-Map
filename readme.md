@@ -9,7 +9,10 @@ Download files
 Click on index.html
 
 Difficulties:
-This project was difficult to begin with but once I got the overall archei
+This project was difficult to begin with but once I got the overall architecture down, it started to make sense. I used 4square's api to get information
+about the hotels through a api call. From there i used KO js to implement a filter that lists all hotels and filters based on text input. This part 
+was quite difficult but after looking at many resources i was able to piece it together.
+
 Resources used: 
 
 https://stackoverflow.com/questions/47741328/filtering-list-with-knockout
