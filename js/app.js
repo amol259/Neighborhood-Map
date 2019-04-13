@@ -86,7 +86,7 @@ function initMap() {
     }
 
     //Calls view model function in model.js file
-    ko.applyBindings(new viewModel());
+    ko.applyBindings(new ViewModel());
 }
 
 function errorHandling() {
@@ -119,54 +119,36 @@ function fourSquarerequest (marker) {
   });
 };
 
-function viewModel() {
-  var self = this;
+var Place = function(data) {
+  this.title = ko.observable(data.title);
+  console.log(title)
+}
 
-  //binds user input from html
-  self.userInput = ko.observable('');
-  //Observable array for the hotels
-  self.places = ko.observableArray();
+function ViewModel() {
+  var self = this;
+  //array for locations
+  self.placeList = ko.observableArray([]);
+  //query used to filter
+  self.query = ko.observable('');
 
   //copy markers array into places array
   for(var i = 0; i < markers.length; i++) {
-    self.places.push(markers[i])
+    self.placeList.push(markers[i])
   }
-  
   self.listedItem = function(marker) {
      google.maps.event.trigger(marker, 'click');
   }
+  self.filteredPlaces = ko.computed(function() {
+    if (!self.query()) {
+      return self.placeList();
+    } else {
+      return self.placeList()
+        .filter(place => place.title.toLowerCase().indexOf(self.query().toLowerCase()) > -1);
+    }
+  });
 
+  };
 
-  /*Function to filter markers in real-time based on user input*/
-    this.filteredItems = ko.computed(function() {
-      /*converts userInput to lowercase and stores in filter*/
-      var filter = self.userInput().toLowerCase();
-      /*Checks to see in the places array if any text entered by the user matches the markers,
-        if not then all markers stay visible on the map*/
-      if (!filter) {
-        self.places().forEach(function(item){
-          item.setVisible(true);
-        });
-        return self.places();
-       /*If the userInput does match a marker in the places array
-         then input is handled by the knockout arrayFilter method*/
-      } else {
-        /*first we call the call the arrayFilter method and give the places
-          array as an argument*/
-        return ko.utils.arrayFilter(self.places(), function(item) {
-          /*Next we store the result in the variable "match" of getting the lower case maker name and
-            making sure that indexOf(filter) returns greater than or equal to 0. If true then the
-            array is filtered for only the markers name that match the userinput, which allows for
-            real time search functionality in the map.*/
-          var match = item.name.toLowerCase().indexOf(filter) >= 0
-                item.setVisible(match);
-                return match;
-      })
-    }}, self);
-
-
-
-  }
 
 
 
