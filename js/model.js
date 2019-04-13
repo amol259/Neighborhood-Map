@@ -11,9 +11,9 @@ var ViewModel = function() {
       self.places.push(markers[i])
     }
     /*Animates the markers and opens the infowindow when text in the listview is clicked*/
-    self.listedItem = function(marker) {
-       google.maps.event.trigger(marker, 'click');
-    }
+    // self.listedItem = function(marker) {
+    //    google.maps.event.trigger(marker, 'click');
+    // }
 
 
     /*Function to filter markers in real-time based on user input*/
